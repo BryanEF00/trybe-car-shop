@@ -16,12 +16,12 @@ const errorHandler: ErrorRequestHandler = (
   const mappedError = errorCatalog[messageAsErrorType];
 
   if (mappedError) {
-    const { httpStatus, message } = mappedError;
+    const { httpStatus, error } = mappedError;
 
-    return res.status(httpStatus).json({ message });
+    return res.status(httpStatus).json({ error });
   }
 
-  return res.status(500).json({ message: 'internal error' });
+  return res.status(500).json({ error: 'internal error' });
 };
 
 export default errorHandler;
