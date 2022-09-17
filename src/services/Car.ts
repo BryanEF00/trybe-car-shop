@@ -3,10 +3,10 @@ import { CarZodSchema, ICar } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
 
 class CarService implements IService<ICar> {
-  private _cars: IModel<ICar>;
+  private _carModel: IModel<ICar>;
 
   constructor(model:IModel<ICar>) {
-    this._cars = model;
+    this._carModel = model;
   }
 
   public async create(obj: unknown): Promise<ICar> {
@@ -16,7 +16,11 @@ class CarService implements IService<ICar> {
       throw parsed.error;
     }
 
-    return this._cars.create(parsed.data);
+    return this._carModel.create(parsed.data);
+  }
+
+  public async read():Promise<ICar[]> {
+    return this._carModel.read();
   }
 }
 
