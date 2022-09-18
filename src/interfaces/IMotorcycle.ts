@@ -6,6 +6,7 @@ const motorcycleZodSchema = VehicleZodSchema.extend({
   category: z.enum(['Street', 'Custom', 'Trail']),
   engineCapacity: z.number()
     .int()
+    .positive()
     .lte(2500),
 });
 
