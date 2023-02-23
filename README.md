@@ -105,3 +105,6 @@ To run this project, you'll need to first install [Node.js](https://nodejs.org/e
     ```bash
       npm run test:coverage
     ```
+
+# API Documentation
+  You can find the API Documentation with `Swagger UI` at: [http://localhost:3001/docs](http://localhost:3001/docs).
