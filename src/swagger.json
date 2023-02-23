@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Car Shop API",
+    "description": "This is a simple CRUD API to manage a car dealership.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/cars": {
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Create a new car.",
+        "description": "This route receives a POST request to register a vehicle of type car.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              },
+              "examples": {
+                "car": {
+                  "value": {
+                    "model": "Ferrari Maranello",
+                    "year": 1963,
+                    "color": "red",
+                    "buyValue": 3500000,
+                    "seatsQty": 2,
+                    "doorsQty": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                },
+                "examples": {
+                  "car": {
+                    "value": {
+                      "_id": "4edd40c86762e0fb12000003",
+                      "model": "Ferrari Maranello",
+                      "year": 1963,
+                      "color": "red",
+                      "buyValue": 3500000,
+                      "seatsQty": 2,
+                      "doorsQty": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Get all cars.",
+        "description": "This route receives a GET request to return all vehicles of type car registered in the database.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Car"
+                },
+                "examples": {
+                  "cars": {
+                    "value": [
+                      {
+                        "_id": "4edd40c86762e0fb12000003",
+                        "model": "Ferrari Maranello",
+                        "year": 1963,
+                        "color": "red",
+                        "buyValue": 3500000,
+                        "seatsQty": 2,
+                        "doorsQty": 2
+                      }
+                    ]
+                  },
+                  "empty": {
+                    "value": []
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/{id}": {
+      "get": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Get a car by id.",
+        "description": "This route receives a GET request to find a certain vehicle of type car that has the id passed as a parameter in the route.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                },
+                "examples": {
+                  "cars": {
+                    "value": {
+                      "_id": "4edd40c86762e0fb12000003",
+                      "model": "Ferrari Maranello",
+                      "year": 1963,
+                      "color": "red",
+                      "buyValue": 3500000,
+                      "seatsQty": 2,
+                      "doorsQty": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "error": "Id must have 24 hexadecimal characters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "error": "Object not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Car": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "color": {
+            "type": "string"
+          },
+          "buyValue": {
+            "type": "number"
+          },
+          "seatsQty": {
+            "type": "number"
+          },
+          "doorsQty": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
